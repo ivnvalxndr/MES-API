@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MES.Business")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d27b0d5a98648a0e1064992d1d447d964f81f312")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2cc45fc4ec4bea043dfba7910b587ab715d02613")]
 [assembly: System.Reflection.AssemblyProductAttribute("MES.Business")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MES.Business")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
