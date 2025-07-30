@@ -4,9 +4,9 @@ namespace MES.Business;
 
 public interface IOrderService
 {
-    IEnumerable<DTO> GetAll();
-    DTO GetById(int id);
-    long Create(DTO dto);
-    void Update(int id, DTO dto);
+    IEnumerable<OrderDTO> GetAll();
+    OrderDTO GetById(int id);
+    long Create(OrderDTO dto);
+    void Update(int id, OrderDTO dto);
     void Delete(int id);
 }

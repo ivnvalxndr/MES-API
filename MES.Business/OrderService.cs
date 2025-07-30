@@ -1,58 +1,60 @@
 ﻿using MES.Business.Services;
 using MES.Data;
 using Microsoft.Extensions.Logging;
-using SharedModels;
+using MES.Shared;
 
 namespace MES.Business;
 
-public class OrderService
+public class OrderService : IOrderService
 {
+    private readonly AppDbContext _db;
+    private readonly ILogger<ProductionPlanService> _logger;
+
     public OrderService(AppDbContext db, ILogger<ProductionPlanService> logger)
     {
         _db = db;
         _logger = logger;
     }
 
-    public IEnumerable<ProductionPlanDto> GetAll()
+    public IEnumerable<OrderDTO> GetAll()
     {
-        return _db.ProductionPlans
+        return _db.Orders
             .AsEnumerable()
-            .Select(p => p.ToDto());
+            .Select(p => p.ToDTO());
     }
 
-    public ProductionPlanDto GetById(int id)
+    public OrderDTO GetById(int id)
     {
-        var entity = _db.ProductionPlans.Find(id);
-        return entity != null ? ProductionPlanMapper.ToDto(entity) : null;
+        var entity = _db.Orders.Find(id);
+        return entity != null ? OrderDTOTranslator.ToDTO(entity) : null;
     }
 
-    public long Create(ProductionPlanDto dto)
+    public long Create(OrderDTO dto)
     {
         var entity = dto.ToEntity();
-        _db.ProductionPlans.Add(entity);
+        _db.Orders.Add(entity);
         _db.SaveChanges();
-        _logger.LogInformation("Created production plan with ID {PlanId}", entity.Id);
-        return entity.Id;
+        _logger.LogInformation("Created Order with ID {OrderId}", entity.OrderID);
+        return entity.OrderID;
     }
 
-    public void Update(int id, ProductionPlanDto dto)
+    public void Update(int id, OrderDTO dto)
     {
-        var entity = _db.ProductionPlans.Find(id);
+        var entity = _db.Orders.Find(id);
         if (entity != null)
         {
             entity.Name = dto.Name;
-            entity.StartDate = dto.StartDate;
-            entity.EndDate = dto.EndDate;
+            //TODO Доделать
             _db.SaveChanges();
         }
     }
 
     public void Delete(int id)
     {
-        var entity = _db.ProductionPlans.Find(id);
+        var entity = _db.Orders.Find(id);
         if (entity != null)
         {
-            _db.ProductionPlans.Remove(entity);
+            _db.Orders.Remove(entity);
             _db.SaveChanges();
         }
     }

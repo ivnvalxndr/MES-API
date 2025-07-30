@@ -4,9 +4,9 @@ namespace MES.API.Controllers;
 
 public interface IProductionPlanService
 {
-    IEnumerable<DTO> GetAll();
-    DTO GetById(int id);
-    long Create(DTO dto);
-    void Update(int id, DTO dto);
+    IEnumerable<ProductionPlanDTO> GetAll();
+    ProductionPlanDTO GetById(int id);
+    long Create(ProductionPlanDTO dto);
+    void Update(int id, ProductionPlanDTO dto);
     void Delete(int id);
 }

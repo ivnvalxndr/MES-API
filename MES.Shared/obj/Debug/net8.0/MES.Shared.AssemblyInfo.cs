@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MES.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1d2682f6965a2baccfa97e622e87187800745a21")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35e8f36928c9083021c6c1e1073b66dc2eed82e4")]
 [assembly: System.Reflection.AssemblyProductAttribute("MES.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MES.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

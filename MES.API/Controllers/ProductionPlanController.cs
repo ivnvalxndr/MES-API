@@ -1,6 +1,6 @@
 using MES.API.Controllers;
 using Microsoft.AspNetCore.Mvc;
-using SharedModels;
+using MES.Shared;
 
 namespace MES_API.Controllers;
 
@@ -30,14 +30,14 @@ public class ProductionPlanController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create([FromBody] ProductionPlanDto dto)
+    public IActionResult Create([FromBody] ProductionPlanDTO dto)
     {
         var id = _planService.Create(dto);
         return CreatedAtAction(nameof(GetById), new { id }, null);
     }
 
     [HttpPut("{id}")]
-    public IActionResult Update(int id, [FromBody] ProductionPlanDto dto)
+    public IActionResult Update(int id, [FromBody] ProductionPlanDTO dto)
     {
         _planService.Update(id, dto);
         return NoContent();

@@ -16,29 +16,29 @@ public class ProductionPlanService : IProductionPlanService
         _logger = logger;
     }
 
-    public IEnumerable<DTO> GetAll()
+    public IEnumerable<ProductionPlanDTO> GetAll()
     {
         return _db.ProductionPlans
             .AsEnumerable()
-            .Select(p => p.ToDto());
+            .Select(p => p.ToDTO());
     }
 
-    public DTO GetById(int id)
+    public ProductionPlanDTO GetById(int id)
     {
         var entity = _db.ProductionPlans.Find(id);
-        return entity != null ? ProductionPlanTranslator.ToDto(entity) : null;
+        return entity != null ? ProductionPlanTranslator.ToDTO(entity) : null;
     }
 
-    public long Create(DTO dto)
+    public long Create(ProductionPlanDTO dto)
     {
         var entity = dto.ToEntity();
         _db.ProductionPlans.Add(entity);
         _db.SaveChanges();
-        _logger.LogInformation("Created production plan with ID {PlanId}", entity.Id);
-        return entity.Id;
+        _logger.LogInformation("Created production plan with ID {PlanId}", entity.ProductionPlanID);
+        return entity.ProductionPlanID;
     }
 
-    public void Update(int id, DTO dto)
+    public void Update(int id, ProductionPlanDTO dto)
     {
         var entity = _db.ProductionPlans.Find(id);
         if (entity != null)

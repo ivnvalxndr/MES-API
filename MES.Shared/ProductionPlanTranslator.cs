@@ -8,7 +8,7 @@ public static class ProductionPlanTranslator
     {
         return new ProductionPlanDTO
         {
-            Id = entity.Id,
+            Id = entity.ProductionPlanID,
             Name = entity.Name,
             StartDate = entity.StartDate,
             EndDate = entity.EndDate
@@ -19,7 +19,7 @@ public static class ProductionPlanTranslator
     {
         return new ProductionPlan
         {
-            Id = dto.Id,
+            ProductionPlanID = dto.Id,
             Name = dto.Name,
             StartDate = dto.StartDate,
             EndDate = dto.EndDate

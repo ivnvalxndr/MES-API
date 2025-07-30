@@ -2,26 +2,31 @@
 
 namespace MES.Shared;
 
-public class OrderDTOTranslator
+public static class OrderDTOTranslator
 {
     public static OrderDTO ToDTO(this Order entity)
     {
         return new OrderDTO
         {
-            Id = entity.Id,
+            OrderID = entity.OrderID,
             Name = entity.Name,
-            Quantity = entity.Quantity
+            Quantity = entity.Quantity,
+            Priority = entity.Priority,
+            Deadline = entity.Deadline,
+            Status = entity.Status
         };
     }
 
-    public static Order ToEntity(this ProductionPlanDTO dto)
+    public static Order ToEntity(this OrderDTO dto)
     {
         return new Order
         {
-            Id = dto.Id,
+            OrderID = dto.OrderID,
             Name = dto.Name,
-            StartDate = dto.StartDate,
-            EndDate = dto.EndDate
+            Quantity = dto.Quantity,
+            Priority = dto.Priority,
+            Deadline = dto.Deadline,
+            Status = dto.Status
         };
     }
 }
