@@ -1,4 +1,4 @@
-﻿using MES.API.Controllers;
+using MES.API.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using SharedModels;
 
