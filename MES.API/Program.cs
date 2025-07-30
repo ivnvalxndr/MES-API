@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+п»їusing Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +14,7 @@ namespace MES.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // 1. Добавление сервисов
+            // 1. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -52,11 +52,11 @@ namespace MES.API
                 builder.Configuration["S3:AccessKey"],
                 builder.Configuration["S3:SecretKey"]));
 
-            // 6. OPC UA (если нужно)
+            // 6. OPC UA (пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ)
             builder.Services.AddSingleton<IOpcUaService, OpcUaService>();*/
 
             var app = builder.Build();
-
+            
             // Middleware
             app.UseSwagger();
             app.UseSwaggerUI();
