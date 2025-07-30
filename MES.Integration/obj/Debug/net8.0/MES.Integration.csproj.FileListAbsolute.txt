@@ -22,3 +22,4 @@ D:\MES API\MES.Integration\obj\Debug\net8.0\MES.Integration.dll
 D:\MES API\MES.Integration\obj\Debug\net8.0\refint\MES.Integration.dll
 D:\MES API\MES.Integration\obj\Debug\net8.0\MES.Integration.pdb
 D:\MES API\MES.Integration\obj\Debug\net8.0\ref\MES.Integration.dll
+D:\MES API\MES.Integration\obj\Debug\net8.0\MES.Integration.sourcelink.json

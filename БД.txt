@@ -3,3 +3,5 @@ dotnet ef migrations add InitialCreate --project ../MES.Data --startup-project .
 dotnet ef database update --project ../MES.Data --startup-project .
 
 dotnet ef database update --startup-project ../MES.API
+
+dotnet ef database update --verbose --project .\MES.Data\ --startup-project .\MES.API\

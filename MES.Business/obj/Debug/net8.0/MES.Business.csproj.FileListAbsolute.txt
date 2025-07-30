@@ -15,3 +15,4 @@ D:\MES API\MES.Business\obj\Debug\net8.0\MES.Business.dll
 D:\MES API\MES.Business\obj\Debug\net8.0\refint\MES.Business.dll
 D:\MES API\MES.Business\obj\Debug\net8.0\MES.Business.pdb
 D:\MES API\MES.Business\obj\Debug\net8.0\ref\MES.Business.dll
+D:\MES API\MES.Business\obj\Debug\net8.0\MES.Business.sourcelink.json

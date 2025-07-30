@@ -10,3 +10,4 @@ D:\MES API\MES.Data\obj\Debug\net8.0\MES.Data.dll
 D:\MES API\MES.Data\obj\Debug\net8.0\refint\MES.Data.dll
 D:\MES API\MES.Data\obj\Debug\net8.0\MES.Data.pdb
 D:\MES API\MES.Data\obj\Debug\net8.0\ref\MES.Data.dll
+D:\MES API\MES.Data\obj\Debug\net8.0\MES.Data.sourcelink.json

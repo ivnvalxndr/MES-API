@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MES.Integration")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d27b0d5a98648a0e1064992d1d447d964f81f312")]
 [assembly: System.Reflection.AssemblyProductAttribute("MES.Integration")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MES.Integration")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
