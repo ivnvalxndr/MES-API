@@ -1,0 +1,15 @@
+D:\MES API\MES.Shared\obj\Debug\net8.0\MES.Shared.csproj.AssemblyReference.cache
+D:\MES API\MES.Shared\obj\Debug\net8.0\MES.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\MES API\MES.Shared\obj\Debug\net8.0\MES.Shared.AssemblyInfoInputs.cache
+D:\MES API\MES.Shared\obj\Debug\net8.0\MES.Shared.AssemblyInfo.cs
+D:\MES API\MES.Shared\obj\Debug\net8.0\MES.Shared.csproj.CoreCompileInputs.cache
+D:\MES API\MES.Shared\bin\Debug\net8.0\MES.Shared.deps.json
+D:\MES API\MES.Shared\bin\Debug\net8.0\MES.Shared.dll
+D:\MES API\MES.Shared\bin\Debug\net8.0\MES.Shared.pdb
+D:\MES API\MES.Shared\bin\Debug\net8.0\MES.Data.dll
+D:\MES API\MES.Shared\bin\Debug\net8.0\MES.Data.pdb
+D:\MES API\MES.Shared\obj\Debug\net8.0\MES.Shared.csproj.Up2Date
+D:\MES API\MES.Shared\obj\Debug\net8.0\MES.Shared.dll
+D:\MES API\MES.Shared\obj\Debug\net8.0\refint\MES.Shared.dll
+D:\MES API\MES.Shared\obj\Debug\net8.0\MES.Shared.pdb
+D:\MES API\MES.Shared\obj\Debug\net8.0\ref\MES.Shared.dll
