@@ -1,8 +1,8 @@
 ﻿using MES.Shared;
 
-namespace MES.API.Controllers;
+namespace MES.Business;
 
-public interface IProductionPlanService
+public interface IOrderService
 {
     IEnumerable<DTO> GetAll();
     DTO GetById(int id);

@@ -8,8 +8,7 @@ namespace MES.Data;
 public class AppDbContext : DbContext
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    {
-    }
+    { }
 
     // Добавляем DbSet для ваших сущностей
     public DbSet<ProductionPlan> ProductionPlans { get; set; }
@@ -20,6 +19,6 @@ public class AppDbContext : DbContext
     {
         // Здесь можно настроить модели (опционально)
         modelBuilder.Entity<ProductionPlan>().HasKey(p => p.Id);
-        //modelBuilder.Entity<Order>().HasKey(o => o.Id);
+        modelBuilder.Entity<Order>().HasKey(o => o.Id);
     }
 }

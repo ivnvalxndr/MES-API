@@ -1,7 +1,7 @@
 ﻿// DTO
-namespace SharedModels
+namespace MES.Shared
 {
-    public class ProductionPlanDto
+    public class ProductionPlanDTO
     {
         public long Id { get; set; }
         public string Name { get; set; }

@@ -1,13 +1,12 @@
-﻿
-using MES.Data.Models;
+﻿using MES.Data.Models;
 
-namespace SharedModels;
+namespace MES.Shared;
 
-public static class ProductionPlanMapper
+public static class ProductionPlanTranslator
 {
-    public static ProductionPlanDto ToDto(this ProductionPlan entity)
+    public static ProductionPlanDTO ToDTO(this ProductionPlan entity)
     {
-        return new ProductionPlanDto
+        return new ProductionPlanDTO
         {
             Id = entity.Id,
             Name = entity.Name,
@@ -16,7 +15,7 @@ public static class ProductionPlanMapper
         };
     }
 
-    public static ProductionPlan ToEntity(this ProductionPlanDto dto)
+    public static ProductionPlan ToEntity(this ProductionPlanDTO dto)
     {
         return new ProductionPlan
         {

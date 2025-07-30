@@ -1,10 +1,8 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using MES.API.Controllers;
 using MES.Business.Services;
 using MES.Data;
+using Serilog;
 
 namespace MES.API
 {
@@ -20,7 +18,7 @@ namespace MES.API
             builder.Services.AddSwaggerGen();
 
             // 2. JWT Authentication
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            /*builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -34,7 +32,7 @@ namespace MES.API
                         IssuerSigningKey = new SymmetricSecurityKey(
                             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
                     };
-                });
+                });*/
 
             // 3. PostgreSQL
             builder.Services.AddDbContext<AppDbContext>(options =>
@@ -54,6 +52,15 @@ namespace MES.API
 
             // 6. OPC UA (если нужно)
             builder.Services.AddSingleton<IOpcUaService, OpcUaService>();*/
+
+
+            // Логи
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Console()
+                .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day) // Логи за каждый день
+                .CreateLogger();
+
+            builder.Host.UseSerilog(); // Подключить Serilog
 
             var app = builder.Build();
 
