@@ -363,3 +363,22 @@ MigrationBackup/
 FodyWeavers.xsd
 
 **/appsettings.json
+
+# Build outputs
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# .NET Core
+project.lock.json
+*.runtimeconfig.json
+
+# Logs
+*.log
+
+# Database
+*.db
