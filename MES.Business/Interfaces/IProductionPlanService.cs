@@ -1,6 +1,6 @@
 ﻿using MES.Shared;
 
-namespace MES.API.Controllers;
+namespace MES.Business.Interfaces;
 
 public interface IProductionPlanService
 {

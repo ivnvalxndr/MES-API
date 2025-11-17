@@ -1,6 +1,6 @@
 ﻿using MES.Shared;
 
-namespace MES.Business;
+namespace MES.Business.Interfaces;
 
 public interface IOrderService
 {
