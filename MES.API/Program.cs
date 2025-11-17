@@ -6,9 +6,11 @@ using MES.Business.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using MES.Data.Entities;
 using MES.Data.Interfaces;
 using MES.Data.Repositories;
 using MES.Shared.Translators;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
 
 namespace MES.API
@@ -88,6 +90,17 @@ namespace MES.API
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
                     .UseSnakeCaseNamingConvention());
+
+            builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
+                {
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                })
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
 
             // 4. Регистрация репозиториев
             builder.Services.AddScoped<IUserRepository, UserRepository>();

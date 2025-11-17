@@ -5,7 +5,9 @@ using MES.Shared.DTOs;
 using MES.Data.Interfaces;
 using Microsoft.Extensions.Logging;
 using MES.Business.Interfaces;
+using MES.Data.Entities;
 using MES.Shared;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -13,17 +15,17 @@ namespace MES.Business.Services
 {
     public class AuthService : IAuthService
     {
+        private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
-        private readonly IUserRepository _userRepository;
         private readonly ILogger<AuthService> _logger;
 
         public AuthService(
+            UserManager<User> userManager,
             IConfiguration configuration,
-            IUserRepository userRepository,
             ILogger<AuthService> logger)
         {
+            _userManager = userManager;
             _configuration = configuration;
-            _userRepository = userRepository;
             _logger = logger;
         }
 
@@ -31,20 +33,22 @@ namespace MES.Business.Services
         {
             _logger.LogInformation("Attempting authentication for user: {Username}", loginDTO.Username);
 
-            var user = await _userRepository.GetByUsernameAsync(loginDTO.Username);
+            var user = await _userManager.FindByNameAsync(loginDTO.Username);
 
-            if (user == null || !VerifyPassword(loginDTO.Password, user.PasswordHash))
+            if (user == null || !await _userManager.CheckPasswordAsync(user, loginDTO.Password))
             {
                 _logger.LogWarning("Authentication failed for user: {Username}", loginDTO.Username);
                 return new AuthResultDTO { Success = false, ErrorMessage = "Неверное имя пользователя или пароль" };
             }
 
-            await _userRepository.UpdateLastLoginAsync(user.Id);
+            // Обновляем LastLogin
+            user.LastLogin = DateTime.UtcNow;
+            await _userManager.UpdateAsync(user);
 
             var userDTO = new UserDTO
             {
                 Id = user.Id,
-                Username = user.Username,
+                Username = user.UserName, // Теперь UserName вместо Username
                 Role = user.Role,
                 LastLogin = user.LastLogin
             };
@@ -63,7 +67,7 @@ namespace MES.Business.Services
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Name, user.Username!),
                 new Claim(ClaimTypes.Role, user.Role.ToString()),
                 new Claim("LastLogin", user.LastLogin?.ToString("o") ?? DateTime.UtcNow.ToString("o"))
             };
@@ -87,20 +91,20 @@ namespace MES.Business.Services
 
         public async Task<UserDTO?> GetUserByIdAsync(int userId)
         {
-            var user = await _userRepository.GetByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
             return user != null ? new UserDTO
             {
                 Id = user.Id,
-                Username = user.Username,
+                Username = user.UserName,
                 Role = user.Role,
                 LastLogin = user.LastLogin
             } : null;
         }
 
-        private bool VerifyPassword(string password, string passwordHash)
+        private async Task<bool> VerifyPassword(User user, string password)
         {
-            // ВРЕМЕННО - замените на BCrypt!
-            return password == passwordHash;
+            return await _userManager.CheckPasswordAsync(user, password);
         }
     }
 }

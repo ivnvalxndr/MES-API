@@ -38,6 +38,8 @@ MES.Shared/
   Translators/          ← Translators (Entity ↔ DTO)
     Interfaces/
 
+
+EF Identity
 -----------------------------------------------------------------------
 
 Controllers 	- работа с HTTP, валидация моделей, возврат ответов, маппинг DTO

@@ -12,7 +12,7 @@ public class ProductionPlan : BaseEntity
 
     [Required]
     [StringLength(100)]
-    public string Name { get; set; } = string.Empty;
+    public new string Name { get; set; } = string.Empty;
 
     public string? Description { get; set; }
 

@@ -1,25 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MES.Data.Enums;
+using Microsoft.AspNetCore.Identity;
 
 namespace MES.Data.Entities;
 
-public class User
+public class User : IdentityUser<int>
 {
-    public int Id { get; set; }
-
-    [Required]
-    [StringLength(50)]
-    public string Username { get; set; } = string.Empty;
-
-    [Required]
-    public string PasswordHash { get; set; } = string.Empty;
-
     [Required]
     public UserRole Role { get; set; } = UserRole.Operator;
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? LastLogin { get; set; }
     public bool IsActive { get; set; } = true;
+    
+    // Навигационные свойства (уберите PasswordHash - он уже в IdentityUser)
     public ICollection<Order> CreatedOrders { get; set; } = new List<Order>();
     public ICollection<Order> AssignedOrders { get; set; } = new List<Order>();
 }
