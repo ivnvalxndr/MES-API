@@ -9,6 +9,7 @@ using System.Text;
 using MES.Data.Interfaces;
 using MES.Data.Repositories;
 using MES.Shared.Translators;
+using Microsoft.OpenApi.Models;
 
 namespace MES.API
 {
@@ -21,11 +22,45 @@ namespace MES.API
             // 1. Добавление сервисов
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "MES API",
+                    Version = "v1",
+                    Description = "Manufacturing Execution System API"
+                });
 
-            // 2. JWT Authentication 
-            var jwtSettings = builder.Configuration.GetSection("Jwt"); 
-            var key = Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]!); 
+                // Добавляем поддержку JWT в Swagger
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme."
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+            });
+
+            // 2. JWT Authentication
+            var jwtSettings = builder.Configuration.GetSection("Jwt");
+            var key = Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]!);
 
             builder.Services.AddAuthentication(options =>
             {
@@ -47,43 +82,32 @@ namespace MES.API
                 };
             });
 
-            builder.Services.AddAuthorization(options =>
-            {
-                options.AddPolicy("OperatorOnly", policy =>
-                    policy.RequireRole("Operator"));
-                options.AddPolicy("TechnologistOnly", policy =>
-                    policy.RequireRole("Technologist"));
-                options.AddPolicy("ManagerOnly", policy =>
-                    policy.RequireRole("Manager"));
-                options.AddPolicy("AdminOnly", policy =>
-                    policy.RequireRole("Admin"));
-            });
+            builder.Services.AddAuthorization();
 
             // 3. PostgreSQL
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            // 4. Регистрация репозиториев 
+            // 4. Регистрация репозиториев
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-            // builder.Services.AddScoped<IProductionPlanRepository, ProductionPlanRepository>();
 
-            // 5. Регистрация сервисов 
+            // 5. Регистрация сервисов
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<IProductionPlanService, ProductionPlanService>();
 
-            // 6. Регистрация трансляторов 
+            // 6. Регистрация трансляторов
             builder.Services.AddScoped<OrderDTOTranslator>();
             builder.Services.AddScoped<UserDTOTranslator>();
 
-            // 7. Redis 
+            // 7. Redis (ЗАКОММЕНТИРОВАНО)
             /*
             builder.Services.AddSingleton<IConnectionMultiplexer>(
                 ConnectionMultiplexer.Connect(builder.Configuration["Redis:ConnectionString"]));
             */
 
-            // 8. MinIO/S3 
+            // 8. MinIO/S3 (ЗАКОММЕНТИРОВАНО)
             /*
             builder.Services.AddSingleton<IFileStorage>(new S3Storage(
                 builder.Configuration["S3:Endpoint"],
@@ -91,7 +115,7 @@ namespace MES.API
                 builder.Configuration["S3:SecretKey"]));
             */
 
-            // 9. OPC UA (если нужно) 
+            // 9. OPC UA (если нужно) (ЗАКОММЕНТИРОВАНО)
             /*
             builder.Services.AddSingleton<IOpcUaService, OpcUaService>();
             */
@@ -106,19 +130,17 @@ namespace MES.API
 
             var app = builder.Build();
 
-            // Middleware pipeline 
-            if (app.Environment.IsDevelopment())
+            // Middleware pipeline
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MES API v1");
+                c.RoutePrefix = "swagger"; // Стандартный путь
+            });
 
             app.UseHttpsRedirection();
-
-            // Authentication ДОЛЖНО быть перед Authorization!
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.MapControllers();
 
             app.Run();
