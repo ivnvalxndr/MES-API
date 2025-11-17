@@ -12,7 +12,7 @@ public class UserDTOTranslator : ITranslator<User, UserDTO>
         return new UserDTO
         {
             Id = entity.Id,
-            Username = entity.Username,
+            Username = entity.UserName,
             Role = entity.Role,
             LastLogin = entity.LastLogin
         };
@@ -25,7 +25,7 @@ public class UserDTOTranslator : ITranslator<User, UserDTO>
         return new User
         {
             Id = dto.Id,
-            Username = dto.Username,
+            UserName = dto.Username,
             Role = dto.Role,
             LastLogin = dto.LastLogin
         };
@@ -45,7 +45,7 @@ public class UserDTOTranslator : ITranslator<User, UserDTO>
     {
         return new User
         {
-            Username = username,
+            UserName = username,
             PasswordHash = passwordHash,
             Role = role,
             CreatedAt = DateTime.UtcNow,
