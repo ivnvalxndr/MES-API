@@ -11,7 +11,7 @@ namespace MES.Data.Entities
         public long OrderID { get; set; }
 
         // Связь с планом
-        public int ProductionPlanID { get; set; }
+        public long ProductionPlanID { get; set; }
 
         [ForeignKey(nameof(ProductionPlanID))]
         public ProductionPlan Plan { get; set; } = null!;
@@ -21,7 +21,7 @@ namespace MES.Data.Entities
 
         public OrderPriority Priority { get; set; } = OrderPriority.Medium;
 
-        public OrderStatus Status { get; set; } = OrderStatus.Draft;
+        public EntityStatus Status { get; set; } = EntityStatus.Draft;
 
         public DateTime Deadline { get; set; }
         
@@ -44,6 +44,6 @@ namespace MES.Data.Entities
 
         // Вычисляемое свойство (не маппится в БД)
         [NotMapped]
-        public bool IsOverdue => Deadline < DateTime.UtcNow && Status != OrderStatus.Completed;
+        public bool IsOverdue => Deadline < DateTime.UtcNow && Status != EntityStatus.Completed;
     }
 }

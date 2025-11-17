@@ -1,0 +1,7 @@
+dotnet ef database drop --force --project MES.Data --startup-project MES.API -- УДАЛИТЬ 1 
+
+dotnet ef migrations add InitialCreate --project MES.Data --startup-project MES.API -- Первый create 2 
+
+dotnet ef database update --project MES.Data --startup-project MES.API -- Обновы 3 
+
+

@@ -108,10 +108,10 @@ namespace MES.Business.Services
                 throw new UnauthorizedAccessException("Только назначенный оператор может запускать заказ");
 
             // Простая проверка enum - без преобразования!
-            if (order.Status != OrderStatus.Draft && order.Status != OrderStatus.Planned)
+            if (order.Status != EntityStatus.Draft && order.Status != EntityStatus.Planned)
                 throw new InvalidOperationException("Заказ можно запустить только из статуса 'Draft' или 'Planned'");
 
-            order.Status    = OrderStatus.InProgress;
+            order.Status    = EntityStatus.InProgress;
             order.StartedAt = DateTime.UtcNow;
             order.StartedBy = userId;
             order.UpdatedAt = DateTime.UtcNow;
@@ -125,10 +125,10 @@ namespace MES.Business.Services
             var order = await _orderRepository.GetByIdAsync(orderId);
             if (order == null) return false;
 
-            if (order.Status != OrderStatus.InProgress)
+            if (order.Status != EntityStatus.InProgress)
                 throw new InvalidOperationException("Заказ можно завершить только из статуса 'InProgress'");
 
-            order.Status = OrderStatus.Completed;
+            order.Status = EntityStatus.Completed;
             order.CompletedAt = DateTime.UtcNow;
             order.CompletedBy = userId;
             order.UpdatedAt = DateTime.UtcNow;
@@ -144,7 +144,7 @@ namespace MES.Business.Services
             var order = await _orderRepository.GetByIdAsync(orderId);
             if (order == null) return false;
 
-            order.Status = OrderStatus.Cancelled;
+            order.Status = EntityStatus.Cancelled;
             order.UpdatedAt = DateTime.UtcNow;
 
             await _orderRepository.UpdateAsync(order);
@@ -153,7 +153,7 @@ namespace MES.Business.Services
             return true;
         }
 
-        public async Task<bool> UpdateStatusAsync(long orderId, OrderStatus status, int userId)
+        public async Task<bool> UpdateStatusAsync(long orderId, EntityStatus status, int userId)
         {
             var order = await _orderRepository.GetByIdAsync(orderId);
             if (order == null) return false;

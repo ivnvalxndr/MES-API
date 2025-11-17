@@ -41,7 +41,7 @@ namespace MES.Data.Repositories
                 .FirstOrDefaultAsync(o => o.OrderID == orderId);
         }
 
-        public async Task UpdateStatusAsync(long orderId, OrderStatus status)
+        public async Task UpdateStatusAsync(long orderId, EntityStatus status)
         {
             var order = await _dbSet.FindAsync(orderId);
             if (order != null)
@@ -52,7 +52,7 @@ namespace MES.Data.Repositories
             }
         }
 
-        public async Task<IEnumerable<Order>> GetOrdersByStatusAsync(OrderStatus status)
+        public async Task<IEnumerable<Order>> GetOrdersByStatusAsync(EntityStatus status)
         {
             return await _dbSet
                 .Where(o => o.Status == status)

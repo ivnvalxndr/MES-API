@@ -341,7 +341,7 @@ namespace MES.API.Controllers
                 var allOrders = await _orderService.GetAllAsync(userId, userRole);
 
                 // Преобразуем string в OrderStatus для фильтрации
-                if (!Enum.TryParse<OrderStatus>(status, true, out var statusFilter))
+                if (!Enum.TryParse<EntityStatus>(status, true, out var statusFilter))
                 {
                     return BadRequest(new { message = $"Invalid status value: {status}" });
                 }

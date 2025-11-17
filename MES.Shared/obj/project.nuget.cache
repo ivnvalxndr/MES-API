@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "0TqVRch6Zd8=",
+  "dgSpecHash": "ZzmGcPzjMz8=",
   "success": true,
   "projectFilePath": "D:\\MES API\\MES.Shared\\MES.Shared.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\sana-\\.nuget\\packages\\efcore.namingconventions\\9.0.0\\efcore.namingconventions.9.0.0.nupkg.sha512",
     "C:\\Users\\sana-\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.1\\microsoft.entityframeworkcore.9.0.1.nupkg.sha512",
     "C:\\Users\\sana-\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.1\\microsoft.entityframeworkcore.abstractions.9.0.1.nupkg.sha512",
     "C:\\Users\\sana-\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\9.0.1\\microsoft.entityframeworkcore.analyzers.9.0.1.nupkg.sha512",

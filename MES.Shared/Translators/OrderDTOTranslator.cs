@@ -29,7 +29,7 @@ namespace MES.Shared.Translators
                 StartedAt = entity.StartedAt,
                 CompletedBy = entity.CompletedBy,
                 CompletedAt = entity.CompletedAt,
-                IsOverdue = entity.Deadline < DateTime.UtcNow && entity.Status != OrderStatus.Completed
+                IsOverdue = entity.Deadline < DateTime.UtcNow && entity.Status != EntityStatus.Completed
             };
         }
 

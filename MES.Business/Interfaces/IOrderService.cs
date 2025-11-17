@@ -16,7 +16,7 @@ public interface IOrderService
     Task<bool> StartOrderAsync(long orderId, int userId);
     Task<bool> CompleteOrderAsync(long orderId, int userId);
     Task<bool> CancelOrderAsync(long orderId, int userId);
-    Task<bool> UpdateStatusAsync(long orderId, OrderStatus status, int userId);
+    Task<bool> UpdateStatusAsync(long orderId, EntityStatus status, int userId);
 
     // Дополнительные операции
     Task<bool> AssignOperatorAsync(long orderId, int operatorId, int managerId);

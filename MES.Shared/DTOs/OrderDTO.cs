@@ -8,7 +8,7 @@ public class OrderDTO
     public long OrderID { get; set; }
 
     [Required]
-    public int ProductionPlanID { get; set; }
+    public long ProductionPlanID { get; set; }
 
     [Required]
     [Range(1, int.MaxValue)]
@@ -20,7 +20,7 @@ public class OrderDTO
     [Required]
     public DateTime Deadline { get; set; }
 
-    public OrderStatus Status { get; set; } = OrderStatus.Draft;
+    public EntityStatus Status { get; set; } = EntityStatus.Draft;
 
     public int? AssignedOperatorId { get; set; }
     public string? AssignedOperatorName { get; set; }
