@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using MES.Data.Enums;
 
-namespace MES.Data.Models;
+namespace MES.Data.Entities;
 
 public class User
 {
@@ -14,8 +15,7 @@ public class User
     public string PasswordHash { get; set; } = string.Empty;
 
     [Required]
-    [StringLength(20)]
-    public string Role { get; set; } = "Operator";
+    public UserRole Role { get; set; } = UserRole.Operator;
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? LastLogin { get; set; }

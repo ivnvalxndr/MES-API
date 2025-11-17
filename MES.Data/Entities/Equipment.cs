@@ -1,4 +1,4 @@
-﻿namespace MES.Data.Models;
+﻿namespace MES.Data.Entities;
 
 public class Equipment : BaseEntity
 {

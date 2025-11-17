@@ -7,7 +7,7 @@ namespace MES.Business.Services;
 
 public class ProductionPlanService : IProductionPlanService
 {
-    private readonly AppDbContext _db;
+    /*private readonly AppDbContext _db;
     private readonly ILogger<ProductionPlanService> _logger;
 
     public ProductionPlanService(AppDbContext db, ILogger<ProductionPlanService> logger)
@@ -58,7 +58,7 @@ public class ProductionPlanService : IProductionPlanService
             _db.ProductionPlans.Remove(entity);
             _db.SaveChanges();
         }
-    }
+    }*/
 
     
 
@@ -72,4 +72,28 @@ public class ProductionPlanService : IProductionPlanService
         _db.ProductionPlans.Add(entity);
         _db.SaveChanges();
     }*/
+    public IEnumerable<ProductionPlanDTO> GetAll()
+    {
+        throw new NotImplementedException();
+    }
+
+    public ProductionPlanDTO GetById(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public long Create(ProductionPlanDTO dto)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Update(int id, ProductionPlanDTO dto)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Delete(int id)
+    {
+        throw new NotImplementedException();
+    }
 }

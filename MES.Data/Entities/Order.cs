@@ -1,36 +1,49 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Numerics;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using MES.Data.Enums;
 
-namespace MES.Data.Models;
-
-public class Order : BaseEntity
+namespace MES.Data.Entities
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public long OrderID { get; set; }
+    public class Order : BaseEntity
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long OrderID { get; set; }
 
-    // Связь с планом (ProductionPlanID)
-    public int ProductionPlanID { get; set; }
+        // Связь с планом
+        public int ProductionPlanID { get; set; }
 
-    [ForeignKey(nameof(ProductionPlanID))]
-    public ProductionPlan Plan { get; set; }
+        [ForeignKey(nameof(ProductionPlanID))]
+        public ProductionPlan Plan { get; set; } = null!;
 
-    // Связь с материалом/продуктом (Material)
-    /*public int ProductID { get; set; }
+        // Основные данные
+        public int Quantity { get; set; }
 
-    [ForeignKey(nameof(ProductID))]
-    public Material Material { get; set; }*/
+        public OrderPriority Priority { get; set; } = OrderPriority.Medium;
 
-    public int Quantity { get; set; }
+        public OrderStatus Status { get; set; } = OrderStatus.Draft;
 
-    [Required]
-    [StringLength(50)]
-    public required string Priority { get; set; }
+        public DateTime Deadline { get; set; }
+        
+        // Добавляем поля для аутентификации и аудита
+        public int? AssignedOperatorId { get; set; }
 
-    public DateTime Deadline { get; set; }
+        [ForeignKey(nameof(AssignedOperatorId))]
+        public User? AssignedOperator { get; set; }
 
-    [Required]
-    [StringLength(50)]
-    public required string Status { get; set; }
+        public int CreatedBy { get; set; }
+
+        [ForeignKey(nameof(CreatedBy))]
+        public User CreatedByUser { get; set; } = null!;
+
+        public DateTime? StartedAt { get; set; }
+        public int? StartedBy { get; set; }
+
+        public DateTime? CompletedAt { get; set; }
+        public int? CompletedBy { get; set; }
+
+        // Вычисляемое свойство (не маппится в БД)
+        [NotMapped]
+        public bool IsOverdue => Deadline < DateTime.UtcNow && Status != OrderStatus.Completed;
+    }
 }

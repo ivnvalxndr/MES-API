@@ -1,5 +1,5 @@
-﻿using MES.Data.Models;
-
+﻿
+/*
 namespace MES.Shared;
 
 public static class ProductionPlanTranslator
@@ -25,4 +25,4 @@ public static class ProductionPlanTranslator
             EndDate = dto.EndDate
         };
     }
-}
+}*/

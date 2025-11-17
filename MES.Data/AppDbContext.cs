@@ -1,6 +1,5 @@
-﻿using MES.Data.Models;
-using System.Collections.Generic;
-using System.Reflection.Emit;
+﻿using MES.Data.Entities;
+using MES.Data.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace MES.Data;
@@ -22,21 +21,21 @@ public class AppDbContext : DbContext
         foreach (var entity in modelBuilder.Model.GetEntityTypes())
         {
             // Таблица в UPPER CASE
-            entity.SetTableName(entity.GetTableName().ToUpper());
+            entity.SetTableName(entity.GetTableName()?.ToUpper());
 
             // Колонки
             foreach (var property in entity.GetProperties())
             {
-                property.SetColumnName(property.GetColumnBaseName().ToUpper());
+                property.SetColumnName(property.GetColumnName().ToUpper());
             }
 
-            // Первичный ключ (исправленная версия)
+            // Первичный ключ
             if (entity.FindPrimaryKey() is { } primaryKey)
             {
                 primaryKey.SetName($"PK_{entity.GetTableName()}".ToUpper());
             }
 
-            // Внешние ключи (исправленная версия)
+            // Внешние ключи
             foreach (var foreignKey in entity.GetForeignKeys())
             {
                 foreignKey.SetConstraintName(
@@ -63,5 +62,50 @@ public class AppDbContext : DbContext
                 .HasForeignKey("ORDERID")  // Явное указание имени FK
                 .HasConstraintName("FK_PRODUCTIONPLAN_ORDER");
         });*/
+
+        // Конфигурация для User
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasIndex(u => u.Username).IsUnique();
+            entity.Property(u => u.Role).HasDefaultValue("Operator");
+            entity.Property(u => u.CreatedAt).HasDefaultValueSql("NOW()");
+            entity.Property(u => u.IsActive).HasDefaultValue(true);
+        });
+
+        // Начальные данные
+        modelBuilder.Entity<User>().HasData(
+            new User
+            {
+                Id = 1,
+                Username = "admin",
+                PasswordHash = "admin123", // Замените на хеш!
+                Role = UserRole.Admin,
+                IsActive = true
+            },
+            new User
+            {
+                Id = 2,
+                Username = "operator1",
+                PasswordHash = "operator123",
+                Role = UserRole.Operator,
+                IsActive = true
+            },
+            new User
+            {
+                Id = 3,
+                Username = "technologist1",
+                PasswordHash = "tech123",
+                Role = UserRole.Technologist,
+                IsActive = true
+            },
+            new User
+            {
+                Id = 4,
+                Username = "manager1",
+                PasswordHash = "manager123",
+                Role = UserRole.Manager,
+                IsActive = true
+            }
+        );
     }
 }

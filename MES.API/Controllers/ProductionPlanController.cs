@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MES.Shared;
 using MES.Business.Interfaces;
 
-namespace MES_API.Controllers;
+namespace MES.API.Controllers;
 
 [ApiController]
 [Route("api/production-plans")]

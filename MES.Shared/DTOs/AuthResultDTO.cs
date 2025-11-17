@@ -1,4 +1,4 @@
-﻿namespace MES.Shared;
+﻿namespace MES.Shared.DTOs;
 
 public class AuthResultDTO
 {

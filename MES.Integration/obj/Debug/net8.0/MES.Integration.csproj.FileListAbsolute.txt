@@ -18,8 +18,8 @@ D:\MES API\MES.Integration\obj\Debug\net8.0\MES.Integration.GeneratedMSBuildEdit
 D:\MES API\MES.Integration\obj\Debug\net8.0\MES.Integration.AssemblyInfoInputs.cache
 D:\MES API\MES.Integration\obj\Debug\net8.0\MES.Integration.AssemblyInfo.cs
 D:\MES API\MES.Integration\obj\Debug\net8.0\MES.Integration.csproj.CoreCompileInputs.cache
+D:\MES API\MES.Integration\obj\Debug\net8.0\MES.Integration.sourcelink.json
 D:\MES API\MES.Integration\obj\Debug\net8.0\MES.Integration.dll
 D:\MES API\MES.Integration\obj\Debug\net8.0\refint\MES.Integration.dll
 D:\MES API\MES.Integration\obj\Debug\net8.0\MES.Integration.pdb
 D:\MES API\MES.Integration\obj\Debug\net8.0\ref\MES.Integration.dll
-D:\MES API\MES.Integration\obj\Debug\net8.0\MES.Integration.sourcelink.json
